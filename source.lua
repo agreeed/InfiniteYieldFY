@@ -4248,6 +4248,8 @@ function autoComplete(str,curText)
 end
 
 CMDs = {}
+CMDs[#CMDs + 1] = {NAME = 'debug', DESC = '_G.IY_DEBUG = true'}
+CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Infinite Yield support server.'}
 CMDs[#CMDs + 1] = {NAME = 'console', DESC = 'Loads old Roblox console'}
 CMDs[#CMDs + 1] = {NAME = 'explorer / dex', DESC = 'Opens DEX by Moon'}
@@ -4295,6 +4297,7 @@ CMDs[#CMDs + 1] = {NAME = 'record / rec', DESC = 'Starts roblox recorder'}
 CMDs[#CMDs + 1] = {NAME = 'screenshot / scrnshot', DESC = 'Takes a screenshot'}
 CMDs[#CMDs + 1] = {NAME = 'togglefullscreen / togglefs', DESC = 'Toggles fullscreen'}
 CMDs[#CMDs + 1] = {NAME = 'notify [text]', DESC = 'Sends you a notification with the provided text'}
+CMDs[#CMDs + 1] = {NAME = 'notifyexec [code]', DESC = 'Executes the code and sends you a notification with the returned value'}
 CMDs[#CMDs + 1] = {NAME = 'lastcommand / lastcmd', DESC = 'Executes the previous command used'}
 CMDs[#CMDs + 1] = {NAME = 'exit', DESC = 'Kills roblox process'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
@@ -6210,6 +6213,15 @@ Players.LocalPlayer.OnTeleport:Connect(function(State)
 	end
 end)
 
+addcmd('debug',{},function(args, speaker)
+	_G.IY_DEBUG = not _G.IY_DEBUG
+	if _G.IY_DEBUG then
+		notify("Debug mode is now enabled")
+	else
+		notify("Debug mode is now disabled")
+	end
+end)
+
 addcmd('addalias',{},function(args, speaker)
 	if #args < 2 then return end
 	local cmd = string.lower(args[1])
@@ -7717,6 +7729,10 @@ end)
 
 addcmd('notify',{},function(args, speaker)
 	notify(getstring(1))
+end)
+addcmd('notifyexec',{},function(args, speaker)
+	local re = loadstring(getstring(1))()
+	notify(tostring(re))
 end)
 
 addcmd('lastcommand',{'lastcmd'},function(args, speaker)
