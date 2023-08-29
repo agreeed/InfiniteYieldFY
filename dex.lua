@@ -5,6 +5,7 @@
 	Final Version
 	Developed by Moon
 	Modified for Infinite Yield
+	Modified again for IYFY
 	
 	Dex is a debugging suite designed to help the user debug games and find any potential vulnerabilities.
 	
@@ -10362,7 +10363,7 @@ Main = (function()
 		
 		if identifyexecutor then Main.Executor = identifyexecutor() end
 		
-		Main.GuiHolder = service.CoreGui:FindFirstChild("DevConsoleMaster") or (Main.Elevated and service.CoreGui or plr:FindFirstChildOfClass("PlayerGui"))
+		Main.GuiHolder = game:GetService("CoreGui"):FindFirstChild("DevConsoleMaster") or (Main.Elevated and service.CoreGui or plr:FindFirstChildOfClass("PlayerGui"))
 		
 		setmetatable(env, nil)
 	end
