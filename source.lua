@@ -4249,10 +4249,13 @@ end
 
 CMDs = {}
 CMDs[#CMDs + 1] = {NAME = 'debug', DESC = '_G.IY_DEBUG = true'}
+CMDs[#CMDs + 1] = {NAME = 'rnown', DESC = 'Resign network ownership over character'}
+CMDs[#CMDs + 1] = {NAME = 'looprnown', DESC = 'Loop resign network ownership over character'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Infinite Yield support server.'}
 CMDs[#CMDs + 1] = {NAME = 'console', DESC = 'Loads old Roblox console'}
 CMDs[#CMDs + 1] = {NAME = 'explorer / dex', DESC = 'Opens DEX by Moon'}
+CMDs[#CMDs + 1] = {NAME = 'newdex / ndex', DESC = 'Opens New DEX by vxx'}
 CMDs[#CMDs + 1] = {NAME = 'olddex / odex', DESC = 'Opens Old DEX by Moon'}
 CMDs[#CMDs + 1] = {NAME = 'remotespy / rspy', DESC = 'Opens Simple Spy V3'}
 CMDs[#CMDs + 1] = {NAME = 'audiologger / alogger', DESC = 'Opens Edges audio logger'}
@@ -6219,6 +6222,21 @@ addcmd('debug',{},function(args, speaker)
 		notify("Debug mode is now enabled")
 	else
 		notify("Debug mode is now disabled")
+	end
+end)
+
+addcmd('resetnetworkownership',{'rnown'},function(args, speaker)
+	getRoot(speaker.Character).AssemblyLinearVelocity +=
+		Vector3.new(0, -math.huge, 0)
+end)
+
+addcmd('loopresetnetworkownership',{'looprnown'},function(args, speaker)
+	root = getRoot(speaker.Character)
+
+	while root do
+		root.AssemblyLinearVelocity +=
+			Vector3.new(0, -math.huge, 0)
+		wait()
 	end
 end)
 
